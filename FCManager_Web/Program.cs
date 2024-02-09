@@ -47,8 +47,8 @@ var app = builder.Build();
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    aspnetcore - hsts.
-        app.UseHsts();
+    //aspnetcore - hsts.
+    //    app.UseHsts();
 }
 
 app.UseHttpsRedirection();
