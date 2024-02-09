@@ -1,0 +1,36 @@
+﻿@model FCManager.Models.ViewModels.Account.LoginViewModel
+@{
+    ViewData["Title"] = "Login";
+    Layout = "_LoginLayout";
+
+}
+
+<div class="row">
+    <div class="col-3">
+    </div>
+    <div class="col-6">
+        <form class="modal-content animate" asp-controller="Account" asp-action="Login" method="post">
+            <div class="imgcontainer">
+                <img src="~/img/logo-nav.png" alt="Avatar" class="avatar">
+            </div>
+
+            <div class="container">
+                <label for="uname"><b>Username</b></label>
+                <label asp-for="Email"></label>
+                <input type="text" placeholder="Enter Username or Email" name="email" asp-for="Email" required>
+
+                <label for="psw"><b>Password</b></label>
+                <label asp-for="Password"></label>
+                <input type="password" placeholder="Enter Password" name="password" asp-for="Password" required>
+
+                <button type="submit">Login</button>
+            </div>
+
+            <div class="container" style="background-color:#f1f1f1">
+                <span class="psw"> <a href="#">Forgot password?</a></span>
+            </div>
+        </form>
+    </div>
+    <div class="col-3">
+    </div>
+</div>

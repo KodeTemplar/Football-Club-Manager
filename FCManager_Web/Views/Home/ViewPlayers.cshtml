@@ -1,0 +1,134 @@
+﻿@using FCManager.Models.Account;
+@model List<AuthenticationResponse>
+@{
+    ViewData["Title"] = "Players";
+}
+
+<style>
+    .card img {
+        height: 200px;
+        width: 100%;
+    }
+
+      #photo {
+        position: relative !important;
+        max-width: 100% !important;
+        max-height: 100% !important;
+    }
+
+    .viewform input{
+        border: none !important;
+        background-color: white !important;
+    }
+
+    .viewform select{
+        border: none !important;
+        background-color: white !important;
+    }
+</style>
+@Html.Hidden("TeamId", (object)ViewBag.TeamId)
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Team List for <span id="teamName"></span></h2>
+        </div>
+
+    </div>
+    <br /><br />
+    <div class="row" id="teamMembers">
+    </div>
+
+    <div class="text-center">
+        <div class="spinner-grow text-primary text-center" role="status" id="pageLoader">
+            <span class="sr-only"></span>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Team Member Details</h1>
+                <button type="button" class="btn-close" id="closeModal" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="row viewform" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-floating py-2 col-6">
+                        <input class="form-control" autocomplete="on" aria-required="true" id="firstname" required />
+                        <label class="required">First Name</label>
+                    </div>
+
+                    <div class="form-floating py-2 col-6">
+                        <input class="form-control" autocomplete="on" aria-required="true" id="lastname" required />
+                        <label class="required">Last Name</label>
+                    </div>
+
+                    <div class="form-floating py-2 col-4">
+                        <input class="form-control" autocomplete="on" aria-required="true" id="height" required />
+                        <label class="required">Height</label>
+                    </div>
+
+                    <div class="form-floating py-2 col-4">
+                        <input class="form-control" autocomplete="on" aria-required="true" id="weight" required />
+                        <label class="required">Weight</label>
+                    </div>
+
+                    <div class="form-floating py-2 col-4">
+                        <input class="form-control" autocomplete="on" aria-required="true" id="nationality" required />
+                        <label class="required">Nationality</label>
+                    </div>
+
+                    <div class="form-floating py-2 col-6">
+                        <input class="form-control" autocomplete="on" aria-required="true" id="position" required />
+                        <label class="required">Position</label>
+                    </div>
+
+                    <div class="form-floating py-2 col-6">
+                        <input class="form-control" autocomplete="on" aria-required="true" id="number" required />
+                        <label class="required">Player Number</label>
+                    </div>
+
+                    <div class="form-floating py-2 col-6">
+                        <select class="form-control" id="category" style="background-color: white !important; border: none !important">
+                            <option value="1">Coach</option>
+                            <option value="2">Player</option>
+                        </select>
+                        <label class="required">Member Category</label>
+                    </div>
+
+                    <div class="form-floating py-2 col-6">
+                        <select class="form-control" id="gender" style="background-color: white !important; border: none !important">
+                            <option value="1">Male</option>
+                            <option value="2">Female</option>
+                            <option value="3">Unspecified</option>
+                        </select>
+                        <label class="required">Gender</label>
+                    </div>
+
+                    <div class="form-floating py-2 col-6">
+                        <input class="form-control" autocomplete="on" aria-required="true" type="date" id="dateofbirth" required />
+                        <label class="required">Date of Birth</label>
+                    </div>
+
+                    <div class="form-floating py-2 col-6">
+                        <input class="form-control" autocomplete="on" aria-required="true" id="dateofsigning" type="date" required />
+                        <label  class="required">Date of Signing</label>
+                    </div>
+
+                    <div class="py-2 col-6">
+                        @*<label asp-for="CreateTeamMember.Image">Team's Logo</label>*@
+                        <img src="~/img/default_img.png" class="img-responsive" id="photo">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script src="~/js/Public/TeamList.js"true"></script>
+}

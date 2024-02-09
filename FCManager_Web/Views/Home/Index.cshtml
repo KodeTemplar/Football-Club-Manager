@@ -1,0 +1,91 @@
+﻿@*@model IEnumerable<Team>*@
+@{
+    ViewData["Title"] = "Index";
+}
+
+<style>
+    .card img {
+        height: 200px;
+        width: 100%;
+    }
+
+    .viewform input {
+        border: none !important;
+        background-color: white !important;
+    }
+
+    #photo {
+        position: relative !important;
+        max-width: 100% !important;
+        max-height: 100% !important;
+    }
+</style>
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Team List</h2>
+        </div>
+
+    </div>
+    <br /><br />
+    <div class="row" id="teams">
+    </div>
+
+        <div class="text-center" >
+        <div class="spinner-grow text-primary text-center" role="status" id="pageLoader">
+            <span class="sr-only"></span>
+        </div>
+    </div>
+</div>
+
+@*VIEW TEAM MODAL*@
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1>
+                <button type="button" class="btn-close" id="closeModal" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="row viewform" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-floating py-2 col-12">
+                        <input class="form-control" autocomplete="on" aria-required="true" id="name" required />
+                        <label class="required">Name</label>
+                    </div>
+                    <div class="form-floating py-2 col-6">
+                        <input class="form-control" aria-required="true" id="country" required />
+                        <label class="required">Country</label>
+                    </div>
+
+                    <div class="form-floating py-2 col-6">
+                        <input class="form-control" aria-required="true" id="stadium" required />
+                        <label class="required">Stadium</label>
+                    </div>
+                    <div class="form-floating py-2 col-6">
+                        <input class="form-control" aria-required="true" id="url" />
+                        <label>Homepage Url</label>
+                    </div>
+                    <div class="py-2 col-6">
+                        <label>Team's Logo</label>
+                        <img src="~/img/Team-Logo-Default.jpg" class="img-responsive" id="photo">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script src="~/js/public/index.js" asp-asp-append-version="true"></script>
+    <script>
+        function RedirectToPlayer(id, name) {
+           localStorage.setItem("teamId", id);
+           localStorage.setItem("teamName", name);
+            var baseUrl = "@Url.Action("ViewPlayers","Home")";
+            window.location.pathname = baseUrl+`/${id}`;
+        }
+    </script>
+}
